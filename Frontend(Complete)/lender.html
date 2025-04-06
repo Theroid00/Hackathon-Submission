@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lender Dashboard | Sahara</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="lender.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid" style="background-color: rgba(157, 237, 175, 0.2);">
+      <a class="navbar-brand" href="#">
+        <img src="pics\image-removebg-preview (4).png" alt="Logo" style="width: 50px; height: 50px;">
+        Sahara
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home.html" style="color: #1c9838; margin-left: 540px;">
+              <i class="fa-solid fa-home"></i> Home
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="dashboard-title animate__animated animate__fadeIn">Lender Dashboard</h1>
+    
+    <div class="lender-score-container animate__animated animate__fadeIn">
+      <span class="lender-score-badge animate__animated animate__pulse animate__infinite">
+        <i class="fa-solid fa-medal"></i> Elite Lender
+      </span>
+      <h1>Your LENDER SCORE <i class="fa-solid fa-arrow-right"></i></h1>
+      <div class="lender-score">850</div>
+      <p class="score-description">Excellent lending performance! Top 5% of lenders.</p>
+      
+      <div class="score-meter">
+        <div class="score-progress"></div>
+      </div>
+      
+      <div class="score-labels">
+        <span>300</span>
+        <span>500</span>
+        <span>700</span>
+        <span>900</span>
+      </div>
+    </div>
+
+    <div class="card dashboard-card p-4 mb-4 animate__animated animate__fadeInUp">
+      <div class="row text-center g-3">
+        <div class="col-md-3">
+          <i class="fa-solid fa-coins big-icon text-success"></i>
+          <h6 class="text-muted">Total Funds Available</h6>
+          <h3 class="text-success" id="total-funds">₹1,00,000</h3>
+        </div>
+        <div class="col-md-3">
+          <i class="fa-solid fa-hand-holding-dollar big-icon text-warning"></i>
+          <h6 class="text-muted">Funds Lent</h6>
+          <h3 class="text-warning">₹60,000</h3>
+        </div>
+        <div class="col-md-3">
+          <i class="fa-solid fa-chart-line big-icon text-primary"></i>
+          <h6 class="text-muted">Returns Earned</h6>
+          <h3 class="text-primary">₹35,000</h3>
+        </div>
+        <div class="col-md-3">
+          <i class="fa-solid fa-briefcase big-icon text-danger"></i>
+          <h6 class="text-muted">Active Loans</h6>
+          <h3 class="text-danger">4</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4 animate__animated animate__fadeInUp">
+      <a href="#" class="btn btn-success btn-lender me-3" id="add-funds-btn">
+        <i class="fa-solid fa-plus-circle"></i> Add Funds
+      </a>
+      <a href="request.html" class="btn btn-primary btn-lender">
+        <i class="fa-solid fa-list-check"></i> View Requests
+      </a>
+    </div>
+
+    <h3 class="section-title animate__animated animate__fadeIn">Active Loans</h3>
+    
+    <table class="loans-table animate__animated animate__fadeInUp">
+      <thead>
+        <tr>
+          <th>Borrower</th>
+          <th>Amount</th>
+         
+          <th>Term</th>
+          <th>Due Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rahul Sharma</td>
+          <td>₹50,000</td>
+         
+          <td>12 months</td>
+          <td>15 Jun 2025</td>
+          <td><span class="badge-status badge-active">Active</span></td>
+        </tr>
+        <tr>
+          <td>Priya Patel</td>
+          <td>₹20,000</td>
+        
+          <td>18 months</td>
+          <td>30 Sep 2025</td>
+          <td><span class="badge-status badge-active">Active</span></td>
+        </tr>
+        <tr>
+          <td>Vikram Singh</td>
+          <td>₹15,000</td>
+         
+          <td>6 months</td>
+          <td>10 May 2025</td>
+          <td><span class="badge-status badge-active">Active</span></td>
+        </tr>
+        <tr>
+          <td>Ananya Gupta</td>
+          <td>₹12000</td>
+        
+          <td>9 months</td>
+          <td>22 Jul 2025</td>
+          <td><span class="badge-status badge-active">Active</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    
+
+  <div class="modal" id="addFundsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5><i class="fa-solid fa-coins me-2"></i> Add Funds</h5>
+        <button type="button" class="btn-close" id="closeModal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="fundsAmount" class="form-label">Amount to Add (₹)</label>
+          <input type="number" id="fundsAmount" class="form-control" placeholder="Enter amount in ₹" />
+        </div>
+        <div class="mb-3">
+          <label for="paymentMethod" class="form-label">Payment Method</label>
+          <select id="paymentMethod" class="form-select">
+            <option value="">Select payment method</option>
+            <option value="bank">Bank Transfer</option>
+            <option value="upi">UPI</option>
+            <option value="card">Credit/Debit Card</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
+        <button class="btn btn-success" id="confirmAddFunds">
+          <i class="fa-solid fa-plus-circle"></i> Add Funds
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toastSuccess">
+    <i class="fa-solid fa-check-circle me-2"></i> Funds added successfully!
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous"></script>
+  <script>
+    
+    const modal = document.getElementById('addFundsModal');
+    const addFundsBtn = document.getElementById('add-funds-btn');
+    const closeModal = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+    
+    function showModal() {
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 10);
+    }
+    
+    function hideModal() {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 300);
+    }
+    
+    addFundsBtn.addEventListener('click', showModal);
+    closeModal.addEventListener('click', hideModal);
+    cancelBtn.addEventListener('click', hideModal);
+   
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        hideModal();
+      }
+    });
+
+    document.getElementById('confirmAddFunds').addEventListener('click', function() {
+      const amount = parseInt(document.getElementById('fundsAmount').value);
+      const paymentMethod = document.getElementById('paymentMethod').value;
+      
+      if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid amount!');
+        return;
+      }
+      
+      if (!paymentMethod) {
+        alert('Please select a payment method!');
+        return;
+      }
+
+      const btn = this;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+      btn.disabled = true;
+      
+     
+      setTimeout(() => {
+      
+        const totalFunds = parseInt(document.getElementById('total-funds').innerText.replace('₹', '').replace(/,/g, ''));
+        const updatedFunds = totalFunds + amount;
+        document.getElementById('total-funds').innerText = '₹' + updatedFunds.toLocaleString('en-IN');
+
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        
+        hideModal();
+        document.getElementById('fundsAmount').value = '';
+        document.getElementById('paymentMethod').value = '';
+        
+      
+        showToast();
+      }, 1500);
+    });
+    
+    function showToast() {
+      const toast = document.getElementById('toastSuccess');
+      toast.style.display = 'block';
+      
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+    
+   
+    function calculateLenderScore() {
+    
+      return 850; 
+    }
+    
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const score = calculateLenderScore();
+      const scoreElement = document.querySelector('.lender-score');
+      const progressBar = document.querySelector('.score-progress');
+      
+      scoreElement.textContent = score;
+      
+      
+      const progressWidth = ((score - 300) / (900 - 300)) * 100;
+      progressBar.style.width = `${progressWidth}%`;
+    
+      const badge = document.querySelector('.lender-score-badge');
+      if (score >= 800) {
+        badge.innerHTML = '<i class="fa-solid fa-medal"></i> Elite Lender';
+        badge.style.backgroundColor = 'gold';
+      } else if (score >= 700) {
+        badge.innerHTML = '<i class="fa-solid fa-star"></i> Trusted Lender';
+        badge.style.backgroundColor = 'silver';
+      } else if (score >= 600) {
+        badge.innerHTML = '<i class="fa-solid fa-thumbs-up"></i> Good Lender';
+        badge.style.backgroundColor = '#cd7f32'; // Bronze
+      } else {
+        badge.innerHTML = '<i class="fa-solid fa-user"></i> New Lender';
+        badge.style.backgroundColor = '#f8f9fa';
+        badge.style.color = '#343a40';
+      }
+    });
+  </script>
+</body>
+</html>

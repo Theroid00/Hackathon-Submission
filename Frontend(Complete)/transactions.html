@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Transactions</title>
+</head>
+<body>
+  <h1>Transaction History</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Transaction ID</th>
+        <th>Lender</th>
+        <th>Borrower</th>
+        <th>Amount</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="transactions-body"></tbody>
+  </table>
+
+  <script>
+    async function fetchTransactions() {
+      const res = await fetch('/transactions');
+      const transactions = await res.json();
+      const tbody = document.getElementById('transactions-body');
+
+      transactions.forEach(t => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${t.transactionId}</td>
+          <td>${t.lender}</td>
+          <td>${t.borrower}</td>
+          <td>₹${t.amount}</td>
+          <td>${new Date(t.date).toLocaleString()}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    fetchTransactions();
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+
+body, html {
+  margin:0;
+  padding: 0;
+}
+.navbar{
+  padding: 0 !important;
+  position: fixed;
+   width: 100%;
+  z-index: 10000;
+}
+.navbar {
+  background-color: rgba(157, 237, 175, 0.2);
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5fdf7;
+  margin: 0;
+  padding: 0;
+}
+.contact-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-container h1 {
+  text-align: center;
+  color: #1c9838;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1c9838;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #147a27;
+}
+
+/* Toast styling */
+.toast-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1050;
+}
+
+.toast {
+  display: none;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toast.show {
+  display: block;
+}
+
+

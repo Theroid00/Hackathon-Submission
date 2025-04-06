@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Request Updates</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="request.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid" style="background-color: rgba(157, 237, 175, 0.2);">
+          <a class="navbar-brand" href="#">
+            <img src="pics\image-removebg-preview (4).png" alt="Logo" style="width: 50px; height: 50px;">
+            Sahara
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html" style="color: #1c9838; margin-left: 540px;">
+                  <i class="fa-solid fa-home"></i> Home
+                </a>
+              </li>
+            </ul>
+    
+          </div>
+        </div>
+      </nav>
+  <div class="request-updates-section">
+    <div class="section-header">
+      <h2 class="section-title">Loan Requests</h2>
+      <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
+    </div>
+    
+    <div class="request-card pending">
+      <div class="request-header">
+        <h3 class="request-name">Rahul Sharma <span class="status-badge badge-pending">Pending</span></h3>
+        <span class="request-time">2 hours ago</span>
+      </div>
+      <div class="request-details">
+        <span class="request-amount">₹10,000</span>
+        <span class="request-term">12 months term</span>
+        <span class="request-score"><i class="fas fa-star"></i> 780 Trust Score</span>
+      </div>
+      <div class="request-actions">
+        <button class="btn-approve"><i class="fas fa-check"></i> Approve</button>
+        <button class="btn-reject"><i class="fas fa-times"></i> Reject</button>
+        <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+      </div>
+    </div>
+    
+    <div class="request-card">
+      <div class="request-header">
+        <h3 class="request-name">Priya Patel <span class="status-badge badge-approved">Approved</span></h3>
+        <span class="request-time">1 day ago</span>
+      </div>
+      <div class="request-details">
+        <span class="request-amount">₹20,000</span>
+        <span class="request-term">18 months term</span>
+        <span class="request-score"><i class="fas fa-star"></i> 820 Trust Score</span>
+      </div>
+      <div class="request-actions">
+        <button class="btn-view"><i class="fas fa-eye"></i> View Contract</button>
+      </div>
+    </div>
+    
+    <div class="request-card rejected">
+      <div class="request-header">
+        <h3 class="request-name">Vikram Singh <span class="status-badge badge-rejected">Rejected</span></h3>
+        <span class="request-time">3 days ago</span>
+      </div>
+      <div class="request-details">
+        <span class="request-amount">₹15,000</span>
+        <span class="request-term">6 months term</span>
+        <span class="request-score"><i class="fas fa-star"></i> 650 Trust Score</span>
+      </div>
+      <div class="request-actions">
+        <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+      </div>
+    </div>
+    
+   
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

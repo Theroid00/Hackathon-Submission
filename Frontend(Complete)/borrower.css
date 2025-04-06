@@ -1,0 +1,110 @@
+
+ body,html{
+  padding: 0;
+  margin: 0;
+ }
+ .navbar{
+  margin-top: 0 !important;
+ }
+ .dashboard-title {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #76db76, #01250d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 540px;
+    font-weight: bold;
+    
+  }
+  
+  /* Center and space cards in the row */
+.card .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+  }
+  
+  /* Each card styled as a square */
+  .card .row > .col-md-3 {
+    background-color: white;
+    border-radius: 16px;
+    padding: 1rem;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+  
+  .card .row > .col-md-3:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  
+  .card .row h6 {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 500;
+    color: #666;
+    text-align: center;
+  }
+  
+  .card .row h3 {
+    font-size: 20px;
+    margin: 0;
+    color: #1c9838;
+  }
+  
+  .card .row i {
+
+    color: #1c9838;
+    margin-bottom: 0.2rem;
+  }
+  
+   .big-icon{
+    font-size: 20px;
+   }
+
+   .button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* space between buttons */
+    margin-top: 30px;
+  }
+  
+  .btn {
+    background-color: #198754;
+    color: white;
+    padding: 15px 30px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  
+  .breathing-button {
+    animation: breathe 2.5s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(28, 152, 56, 0.4);
+  }
+  
+  @keyframes breathe {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 15px rgba(28, 152, 56, 0.4);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(28, 152, 56, 0.7);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 15px rgba(28, 152, 56, 0.4);
+    }
+  }
+  

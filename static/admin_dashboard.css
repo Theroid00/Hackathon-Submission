@@ -1,0 +1,89 @@
+.navbar {
+    padding: 0px !important;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5fdf7;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #1c9838;
+    margin-bottom: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(28, 152, 56, 0.1);
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1c9838;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #157d2e;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #b2dfdb;
+    color: #004d40;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.fade-in {
+    animation: fadeIn 1.5s ease-in;
+}
+
+.slide-in {
+    animation: slideIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}

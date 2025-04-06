@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History | Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+    <style>
+
+        .navbar{
+            padding: 0px !important;
+        }
+        .stats-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(28, 152, 56, 0.15);
+        }
+        
+        .transactions-title {
+            background: linear-gradient(to right, #1c9838, #165e27);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #495057;
+            font-weight: 500;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 0;
+            margin-right: 2px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            background-color: rgba(28, 152, 56, 0.05);
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: #1c9838;
+            border-bottom: 3px solid #1c9838;
+            background-color: rgba(28, 152, 56, 0.1);
+        }
+        
+        .nav-tabs {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .status-approved {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border-left: 3px solid #28a745;
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .status-denied {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border-left: 3px solid #dc3545;
+        }
+        
+        .page-header {
+            background-color: rgba(157, 237, 175, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #1c9838;
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(157, 237, 175, 0.1);
+        }
+        
+        .badge-status {
+            padding: 6px 12px;
+            font-weight: 500;
+            border-radius: 30px;
+        }
+        
+        .badge-approved {
+            background-color: #1c9838;
+        }
+        
+        .badge-pending {
+            background-color: #f0ad4e;
+        }
+        
+        .badge-denied {
+            background-color: #dc3545;
+        }
+        
+        .modal-reason textarea {
+            resize: none;
+            height: 120px;
+        }
+        
+        #denial-form label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid" style="background-color: rgba(157, 237, 175, 0.2);">
+            <a class="navbar-brand" href="/">
+                <img src="../static/image-removebg-preview (4).png" alt="Logo" style="width: 50px; height: 50px;">
+                Sahara
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin_dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/transaction_history">Transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ledger">Ledger</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="/admin_logout" class="btn btn-outline-danger">
+                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 mb-5">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="transactions-title mb-3">
+                <i class="fas fa-history me-3"></i> Transaction History
+            </h1>
+            <p class="mb-0">Monitor and manage all loan transactions on the Sahara platform.</p>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3" style="margin-left: 12.5vmin;">
+                <div class="card stats-card text-center p-3">
+                    <div class="card-body">
+                        <i class="fas fa-exchange-alt fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Total Transactions</h5>
+                        <h3 class="text-primary">{{ stats.total_transactions }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card stats-card text-center p-3">
+                    <div class="card-body">
+                        <i class="fas fa-rupee-sign fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Total Amount</h5>
+                        <h3 class="text-primary">₹{{ stats.total_amount }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card stats-card text-center p-3">
+                    <div class="card-body">
+                        <i class="fas fa-hourglass-half fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title">Pending Requests</h5>
+                        <h3 class="text-warning">{{ stats.pending_requests }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <!-- <div class="card stats-card text-center p-3">
+                    <div class="card-body">
+                        <i class="fas fa-chart-pie fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Approval Rate</h5>
+                        <h3 class="text-primary">{{ stats.approval_rate }}%</h3>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Transactions Tab Section -->
+        <div class="card p-4 shadow-lg border-0 rounded-4 bg-light">
+            <ul class="nav nav-tabs mb-4" id="transactionTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">
+                        <i class="fas fa-list me-1"></i> All Transactions
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved" type="button" role="tab" aria-controls="approved" aria-selected="false">
+                        <i class="fas fa-check-circle me-1"></i> Approved
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="denied-tab" data-bs-toggle="tab" data-bs-target="#denied" type="button" role="tab" aria-controls="denied" aria-selected="false">
+                        <i class="fas fa-times-circle me-1"></i> Denied
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="transactionTabsContent">
+                <!-- All Transactions Tab -->
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>User ID</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Transaction Hash</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for txn in all_transactions %}
+                                <tr>
+                                    <td>{{ txn.id }}</td>
+                                    <td>{{ txn.txn_type }}</td>
+                                    <td>{{ txn.user_id }}</td>
+                                    <td>₹{{ txn.amount }}</td>
+                                    <td>{{ txn.timestamp }}</td>
+                                    <td>
+                                        <span class="badge badge-status {% if txn.status == 'Approved' %}badge-approved{% elif txn.status == 'Denied' %}badge-denied{% else %}badge-pending{% endif %}">
+                                            {{ txn.status }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <small class="text-muted d-inline-block text-truncate" style="max-width: 150px;">
+                                            {{ txn.txn_hash }}
+                                        </small>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="7" class="text-center py-4">
+                                        <i class="fas fa-info-circle fa-3x text-muted mb-3"></i>
+                                        <p>No transaction data available.</p>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Approved Transactions Tab -->
+                <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>User ID</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Transaction Hash</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for txn in approved_transactions %}
+                                <tr class="status-approved">
+                                    <td>{{ txn.id }}</td>
+                                    <td>{{ txn.txn_type }}</td>
+                                    <td>{{ txn.user_id }}</td>
+                                    <td>₹{{ txn.amount }}</td>
+                                    <td>{{ txn.timestamp }}</td>
+                                    <td>
+                                        <small class="text-muted d-inline-block text-truncate" style="max-width: 150px;">
+                                            {{ txn.txn_hash }}
+                                        </small>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center py-4">
+                                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                                        <p>No approved transactions yet.</p>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Denied Transactions Tab -->
+                <div class="tab-pane fade" id="denied" role="tabpanel" aria-labelledby="denied-tab">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>User ID</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Reason</th>
+                                    <th>Transaction Hash</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for txn in denied_transactions %}
+                                <tr class="status-denied">
+                                    <td>{{ txn.id }}</td>
+                                    <td>{{ txn.txn_type }}</td>
+                                    <td>{{ txn.user_id }}</td>
+                                    <td>₹{{ txn.amount }}</td>
+                                    <td>{{ txn.timestamp }}</td>
+                                    <td>{{ txn.deny_reason or "Not specified" }}</td>
+                                    <td>
+                                        <small class="text-muted d-inline-block text-truncate" style="max-width: 150px;">
+                                            {{ txn.txn_hash }}
+                                        </small>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="7" class="text-center py-4">
+                                        <i class="fas fa-ban fa-3x text-danger mb-3"></i>
+                                        <p>No denied transactions.</p>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deny Reason Modal -->
+    <div class="modal fade" id="denyModal" tabindex="-1" aria-labelledby="denyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="denyModalLabel">
+                        <i class="fas fa-times-circle me-2"></i> Deny Loan Request
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-reason">
+                    <form id="denial-form">
+                        <div class="mb-3">
+                            <label for="deny-reason" class="form-label">Reason for Denial:</label>
+                            <textarea id="deny-reason" class="form-control" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" id="confirm-deny" class="btn btn-danger">
+                        <i class="fas fa-times me-1"></i> Deny Loan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentLoanId;
+        
+        function setLoanId(id) {
+            currentLoanId = id;
+        }
+        
+        document.getElementById('confirm-deny').addEventListener('click', function() {
+            const reason = document.getElementById('deny-reason').value;
+            if (!reason) {
+                alert('Please provide a reason for denial.');
+                return;
+            }
+            
+            window.location.href = `/deny_loan/${currentLoanId}?reason=${encodeURIComponent(reason)}`;
+        });
+    </script>
+</body>
+</html>

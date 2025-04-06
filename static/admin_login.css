@@ -1,0 +1,55 @@
+body, html {
+    margin:0;
+    padding: 0;
+  }
+  .navbar{
+    padding: 0 !important;
+    position: fixed;
+     width: 100%;
+    z-index: 10000;
+  }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5fdf7;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: rgba(157, 237, 175, 0.2);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.login-container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 350px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.form-control:focus {
+    border-color: #1c9838;
+    box-shadow: 0 0 0 0.25rem rgba(28, 152, 56, 0.25);
+}
+
+.btn-success {
+    background-color: #1c9838;
+    border-color: #1c9838;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #157d2e;
+    border-color: #157d2e;
+}
